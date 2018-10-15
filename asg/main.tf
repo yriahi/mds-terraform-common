@@ -30,7 +30,12 @@ resource "aws_launch_template" "default" {
 
   tag_specifications {
     resource_type = "volume"
-    tags          = "${var.tags}"
+
+    tags = "${merge(var.tags, map(
+      "scheduler:ec2-startstop", "${var.instance_schedule}",
+      "Patch Group", "${var.instance_patch_group}",
+      "backup", "${var.instance_backup}"
+    ))}"
   }
 }
 
