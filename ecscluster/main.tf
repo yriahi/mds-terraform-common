@@ -1,0 +1,35 @@
+module "asg" {
+  source        = "../asg"
+  name          = "${var.name}-cls"
+  keypair       = "${var.keypair}"
+  capacity      = "${var.capacity}"
+  instance_type = "${var.instance_type}"
+  ami           = "${var.ami}"
+
+  security_groups = [
+    "${var.security_groups}",
+  ]
+
+  subnets              = "${var.subnets}"
+  policies             = ["arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"]
+  user_data            = "${base64encode(data.template_file.instance_init.rendered)}"
+  instance_schedule    = "${var.instance_schedule}"
+  instance_patch_group = "${var.instance_patch_group}"
+  instance_backup      = "${var.instance_backup}"
+
+  tags = "${merge(var.tags, map(
+      "Name", "${var.name}-cls"
+  ))}"
+}
+
+resource "aws_ecs_cluster" "cluster" {
+  name = "${var.name}-cls"
+}
+
+data "template_file" "instance_init" {
+  template = "${file("${path.module}/src/instance_init.yml")}"
+
+  vars {
+    cluster_name = "${aws_ecs_cluster.cluster.name}"
+  }
+}
