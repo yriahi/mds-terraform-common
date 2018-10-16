@@ -1,6 +1,6 @@
 module "asg" {
   source        = "../asg"
-  name          = "${var.name}-cls"
+  name          = "${var.name}"
   keypair       = "${var.keypair}"
   capacity      = "${var.capacity}"
   instance_type = "${var.instance_type}"
@@ -18,12 +18,12 @@ module "asg" {
   instance_backup      = "${var.instance_backup}"
 
   tags = "${merge(var.tags, map(
-      "Name", "${var.name}-cls"
+      "Name", "${var.name}"
   ))}"
 }
 
 resource "aws_ecs_cluster" "cluster" {
-  name = "${var.name}-cls"
+  name = "${var.name}"
 }
 
 data "template_file" "instance_init" {
