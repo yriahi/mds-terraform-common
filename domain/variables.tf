@@ -46,7 +46,7 @@ variable "notification_topic" {
   default     = ""
 }
 
-variable "name_prefix" {
+variable "name" {
   type = "string"
 }
 

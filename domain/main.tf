@@ -51,7 +51,7 @@ resource "aws_route53_health_check" "domain" {
 
 resource "aws_cloudwatch_metric_alarm" "domain_watch" {
   count               = "${var.notification_topic == "" ? 0 : 1}"
-  alarm_name          = "${var.name_prefix}_domain_health"
+  alarm_name          = "${var.name}_domain_health"
   namespace           = "AWS/Route53"
   metric_name         = "HealthCheckStatus"
   comparison_operator = "LessThanThreshold"
