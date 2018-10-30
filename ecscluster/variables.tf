@@ -55,7 +55,8 @@ variable "instance_patch_group" {
 
 variable "ami" {
   type = "string"
-  description = "AMI to use for "
-  // Amazon Linux ECS optimized us-east-1 (see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
-  default = "ami-07eb698ce660402d2"
+  description = "AMI to use for cluster instances."
+  // Custom AMI based on AWS Linux 2 ECS optimized
+  // Also has SSM.  See packer build (/packer/ecs_ssm.json)
+  default = "ami-0e01268f632ad57d5"
 }
