@@ -55,7 +55,7 @@ variable "instance_patch_group" {
 
 variable "ami" {
   type = "string"
-
+  description = "AMI to use for "
   // Amazon Linux ECS optimized us-east-1 (see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
-  default = "ami-0b9a214f40c38d5eb"
+  default = "ami-07eb698ce660402d2"
 }
