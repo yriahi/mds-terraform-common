@@ -18,3 +18,13 @@ This repository uses Packer to build custom AMIs. To rebuild an AMI:
 packer build packer/ecs_ssm.json
 # Packer will build the AMI and output the ID.
 ```
+
+Development Workflow
+--------------------
+
+These Terraform modules are used by other Terraform code.  Development happens in the `develop` branch.  Once the code is tested and stable, use the following process to make a release:
+
+* Merge `develop` to `master`
+* Update the changelog to categorize items as being in the correct release.  Commit this change directly to `master`.
+* Tag a new release using Semantic versioning (breaking changes are a major release).
+* Merge `master` back to `develop`
