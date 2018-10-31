@@ -73,3 +73,22 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_lambda" {
   principal = "events.amazonaws.com"
   source_arn = "${element(aws_cloudwatch_event_rule.schedule.*.arn, count.index)}"
 }
+
+/**
+ * Alerting
+ */
+resource "aws_cloudwatch_metric_alarm" "alarm" {
+  count = "${length(var.error_topics)}"
+  alarm_name = "${var.name}-failures"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods = 1
+  metric_name = "Errors"
+  namespace = "AWS/Lambda"
+  period = 60
+  threshold = 1
+  dimensions {
+    FunctionName = "${aws_lambda_function.default.function_name}"
+  }
+  alarm_actions             = ["${element(var.error_topics, count.index)}"]
+  treat_missing_data = "ignore"
+}
