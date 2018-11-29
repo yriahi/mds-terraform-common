@@ -19,6 +19,17 @@ resource "aws_lambda_function" "default" {
   ))}"
 }
 
+/**
+ * Logging
+ */
+resource "aws_cloudwatch_log_group" "logs" {
+  name = "/aws/lambda/${var.name}"
+  retention_in_days = 30
+  tags = "${merge(var.tags, map(
+      "Name", "${var.name}"
+  ))}"
+}
+
 
 /**
  * Roles/Permissioning
@@ -86,6 +97,7 @@ resource "aws_cloudwatch_metric_alarm" "alarm" {
   namespace = "AWS/Lambda"
   period = 60
   threshold = 1
+  statistic = "Sum"
   dimensions {
     FunctionName = "${aws_lambda_function.default.function_name}"
   }
