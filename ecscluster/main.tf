@@ -16,6 +16,9 @@ module "asg" {
   instance_schedule    = "${var.instance_schedule}"
   instance_patch_group = "${var.instance_patch_group}"
   instance_backup      = "${var.instance_backup}"
+  schedule = "${var.schedule}"
+  schedule_down = "${var.schedule_down}"
+  schedule_up = "${var.schedule_up}"
 
   tags = "${merge(var.tags, map(
       "Name", "${var.name}"
