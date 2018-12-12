@@ -14,6 +14,10 @@ resource "aws_db_instance" "default" {
   instance_class       = "${var.instance_class}"
   username             = "${var.username}"
   password             = "${var.password}"
+  backup_retention_period = 30
+  copy_tags_to_snapshot = true
+  deletion_protection = true
+  maintenance_window = "wed:04:00-wed:05:00"
   db_subnet_group_name = "${aws_db_subnet_group.default.name}"
   vpc_security_group_ids = [
     "${var.security_groups}",
