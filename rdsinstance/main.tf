@@ -18,6 +18,7 @@ resource "aws_db_instance" "default" {
   copy_tags_to_snapshot = true
   deletion_protection = true
   maintenance_window = "wed:04:00-wed:05:00"
+  storage_encrypted = "${var.storage_encrypted}"
   db_subnet_group_name = "${aws_db_subnet_group.default.name}"
   vpc_security_group_ids = [
     "${var.security_groups}",

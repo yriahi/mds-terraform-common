@@ -3,6 +3,11 @@ Changelog
 
 ## [Unreleased]
 
+## [0.9.0] - 2018-12-13
+### Changed
+- [RDS Instance] Set sane defaults for the maintenance window, snapshot tagging, and deletion protection.
+- [RDS Instance] Allow storage to be optionally encrypted.
+
 ## [0.8.0] - 2018-12-12
 ### Added
 - [ECS Cluster] Add `schedule`, `schedule_down` and `schedule_up` properties, which control instance scheduling using the ASG scheduler.  Until we receive a config exception from EOTSS, these should be used in addition to the `schedulev2` tag (`instance_schedule` property).  Once the exception is granted, we should use `na` for the `schedulev2` tag, and exclusively use the ASG scheduling for all ASG instances. 
