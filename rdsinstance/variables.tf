@@ -58,6 +58,12 @@ variable "allocated_storage" {
   default = 10
 }
 
+variable "storage_encrypted" {
+  type = "string"
+  description = "Boolean indicating whether to encrypt the disk or not"
+  default = false
+}
+
 variable "tags" {
   type = "map"
   description = "A map of tags to use for created resources."
