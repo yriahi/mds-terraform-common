@@ -15,6 +15,7 @@ resource "aws_db_instance" "default" {
   username             = "${var.username}"
   password             = "${var.password}"
   backup_retention_period = 30
+  final_snapshot_identifier= "${var.name}-final"
   copy_tags_to_snapshot = true
   deletion_protection = true
   maintenance_window = "wed:04:00-wed:05:00"
