@@ -7,13 +7,19 @@ resource "aws_lambda_function" "default" {
   source_code_hash = "${base64sha256(file("${var.package}"))}"
   runtime = "${var.runtime}"
   timeout = "${var.timeout}"
+  publish = true
   vpc_config {
     security_group_ids = ["${var.security_groups}"]
     subnet_ids = ["${var.subnets}"]
   }
-  environment {
-    variables = "${var.environment_variables}"
-  }
+  # The aws_lambda_function resource has a schema for the environment
+  # variable, where the only acceptable values are:
+  #   a. Undefined
+  #   b. An empty list
+  #   c. A list containing 1 element: a map with a specific schema
+  # Use slice to get option "b" or "c" depending on whether a non-empty
+  # value was passed into this module.
+  environment = ["${slice( list(var.environment), 0, length(var.environment) == 0 ? 0 : 1 )}"]
   tags = "${merge(var.tags, map(
       "Name", "${var.name}"
   ))}"
@@ -39,7 +45,10 @@ data "aws_iam_policy_document" "assume" {
     actions = ["sts:AssumeRole"]
     principals {
       type = "Service"
-      identifiers = ["lambda.amazonaws.com"]
+      identifiers = [
+        "lambda.amazonaws.com",
+        "edgelambda.amazonaws.com"
+      ]
     }
   }
 }
