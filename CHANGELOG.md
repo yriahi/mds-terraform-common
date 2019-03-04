@@ -3,7 +3,7 @@ Changelog
 
 ## [Unreleased]
 
-## [0.14.0] - 2019-03-04
+## [0.15.0] - 2019-03-04
 ### Changed
 - [RDS Instance] Only specify minor engine version to allow for point version updates.
 
