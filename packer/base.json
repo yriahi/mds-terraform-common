@@ -6,17 +6,17 @@
       "filters": {
         "virtualization-type": "hvm",
         "architecture": "x86_64",
-        "name": "amzn2-ami-ecs-*",
+        "name": "amzn2-ami-hvm-2.0*",
         "root-device-type": "ebs"
       },
       "owners": ["amazon"],
       "most_recent": true
     },
-    "ami_name": "itd-ds-ecs-optimized-ssm-{{timestamp}}",
+    "ami_name": "itd-ds-base-{{timestamp}}",
     "instance_type": "t1.micro",
     "ssh_username": "ec2-user",
     "run_tags": {
-      "Name": "packer-tmp-build-ebs",
+      "Name": "packer-tmp-build-base",
       "Patch Group": "nonprod-linux2",
       "agency": "itd",
       "application": "bastion",
