@@ -3,6 +3,10 @@ Changelog
 
 ## [Unreleased]
 
+## [0.14.0] - 2019-03-04
+### Changed
+- [RDS Instance] Only specify minor engine version to allow for point version updates.
+
 ## [0.13.0] - 2019-02-20
 ### Added
 - [ASG] Add `target_group_arns` and `load_balancers` properties to ASG module to support NLB usage.

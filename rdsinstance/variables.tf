@@ -26,7 +26,7 @@ variable "engine" {
 
 variable "engine_version" {
   type = "string"
-  default = "9.6.3"
+  default = "9.6"
 }
 
 variable "username" {
