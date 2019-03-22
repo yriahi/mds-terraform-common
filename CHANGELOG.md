@@ -3,10 +3,16 @@ Changelog
 
 ## [Unreleased]
 
+## [0.17.0] - 2019-03-22
+### Fixed
+- [Static] Add unique `origin_id` variable to enable CloudFront distribution provisioning.
+### Changed
+- [Static] Switch cloudfront distribution to use `aws_s3_bucket.bucket_regional_domain_name` instead of `aws_s3_bucket.website_endpoint`
+
 ## [0.16.0] - 2019-03-04
 ### Changed
-[ECS Cluster] Use AMI that trusts BLESS keys by default. This can be overridden.
-[ASG] Use AMI that trusts BLESS keys by default. This can be overridden.
+- [ECS Cluster] Use AMI that trusts BLESS keys by default. This can be overridden.
+- [ASG] Use AMI that trusts BLESS keys by default. This can be overridden.
 
 ## [0.15.0] - 2019-03-04
 ### Changed
