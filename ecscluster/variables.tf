@@ -38,6 +38,18 @@ variable "security_groups" {
   default     = []
 }
 
+variable "volume_size" {
+  type = "string"
+  description = "The EBS volume size to use for the root EBS volume"
+  default = 30
+}
+
+variable "volume_encryption" {
+  type = "string"
+  description = "A boolean indicating whether to encrypt the root EBS volume or not."
+  default = false
+}
+
 variable "schedule" {
   type = "string"
   description = "A boolean indicating whether to automatically schedule the ASG according to the `schedule_down` and `schedule_up` variables."
