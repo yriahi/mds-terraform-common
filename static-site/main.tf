@@ -10,6 +10,7 @@ resource "aws_s3_bucket" "site" {
   }
 
   tags = "${merge(var.tags, map(
+      "Name", "${var.domain_name}",
       "dataclassification", "na",
       "public", "yes"
   ))}"
