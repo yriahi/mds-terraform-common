@@ -3,6 +3,13 @@ Changelog
 
 ## [Unreleased]
 
+## [0.18.0] - 2019-03-28
+### Fixed
+- [Static] Apply tags to created S3 bucket.
+### Changed
+- [ECS Cluster, ASG] Allow specification of EBS volume properties (as long as the AMI you're using uses /dev/xvda as the root volume).
+- [RDS Instance] Allow specification of a parameter group.
+
 ## [0.17.0] - 2019-03-22
 ### Fixed
 - [Static] Add unique `origin_id` variable to enable CloudFront distribution provisioning.

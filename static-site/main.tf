@@ -8,6 +8,12 @@ resource "aws_s3_bucket" "site" {
     index_document = "index.html"
     error_document = "${var.error_document}"
   }
+
+  tags = "${merge(var.tags, map(
+      "dataclassification", "na",
+      "public", "yes"
+  ))}"
+
 }
 
 // IAM

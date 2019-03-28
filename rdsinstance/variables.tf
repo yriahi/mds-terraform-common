@@ -29,6 +29,11 @@ variable "engine_version" {
   default = "9.6"
 }
 
+variable "parameter_group_name" {
+  description = "The name of the RDS parameter group to apply to the instance"
+  default = "default.postgres9.6"
+}
+
 variable "username" {
   type = "string"
   description = "The root account username."
