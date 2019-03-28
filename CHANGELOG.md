@@ -3,6 +3,10 @@ Changelog
 
 ## [Unreleased]
 
+## [0.18.1] - 2019-03-28
+### Fixed
+- [Static] Add `Name` tag to the S3 bucket being used for the static site.
+
 ## [0.18.0] - 2019-03-28
 ### Fixed
 - [Static] Apply tags to created S3 bucket.
@@ -49,11 +53,11 @@ Changelog
 
 ## [0.8.0] - 2018-12-12
 ### Added
-- [ECS Cluster] Add `schedule`, `schedule_down` and `schedule_up` properties, which control instance scheduling using the ASG scheduler.  Until we receive a config exception from EOTSS, these should be used in addition to the `schedulev2` tag (`instance_schedule` property).  Once the exception is granted, we should use `na` for the `schedulev2` tag, and exclusively use the ASG scheduling for all ASG instances. 
+- [ECS Cluster] Add `schedule`, `schedule_down` and `schedule_up` properties, which control instance scheduling using the ASG scheduler.  Until we receive a config exception from EOTSS, these should be used in addition to the `schedulev2` tag (`instance_schedule` property).  Once the exception is granted, we should use `na` for the `schedulev2` tag, and exclusively use the ASG scheduling for all ASG instances.
 
 ## [0.7.0] - 2018-12-11
 ### Added
-- [ASG] Add `schedule`, `schedule_down` and `schedule_up` properties, which control instance scheduling using the ASG scheduler.  Until we receive a config exception from EOTSS, these should be used in addition to the `schedulev2` tag (`instance_schedule` property).  Once the exception is granted, we should use `na` for the `schedulev2` tag, and exclusively use the ASG scheduling for all ASG instances. 
+- [ASG] Add `schedule`, `schedule_down` and `schedule_up` properties, which control instance scheduling using the ASG scheduler.  Until we receive a config exception from EOTSS, these should be used in addition to the `schedulev2` tag (`instance_schedule` property).  Once the exception is granted, we should use `na` for the `schedulev2` tag, and exclusively use the ASG scheduling for all ASG instances.
 
 ## [0.6.0] - 2018-12-10
 ### Added
