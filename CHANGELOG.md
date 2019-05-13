@@ -3,6 +3,11 @@ Changelog
 
 ## [Unreleased]
 
+## [0.20.0] - 2019-05-13
+
+### Added
+- [Chamber Policy] Added a chamber policy generation module to automatically build secure read and read/write IAM policies for chamber namespaces.
+
 ## [0.19.0] - 2019-04-17
 ### Changed
 - [Lambda] Use human readable names for Cloudwatch alarm name/description.
