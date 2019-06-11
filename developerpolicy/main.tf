@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "cloudwatch" {
     }
     condition {
       test = "StringEquals"
-      values = ["${var.application}"]
+      values = ["${var.environment}"]
       variable = "logs:ResourceTag/environment"
     }
   }
