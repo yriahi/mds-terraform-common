@@ -38,3 +38,43 @@ data "template_file" "instance_init" {
     cluster_name = "${aws_ecs_cluster.cluster.name}"
   }
 }
+
+data "aws_iam_policy_document" "developer" {
+  // @todo: There's currently no way to allow describing of services on a per-resource level.
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:ListClusters",
+      "ecs:ListServices",
+      "ecs:DescribeClusters",
+      "cloudwatch:GetMetricStatistics",
+      // Allows scheduled task visibility
+      "events:ListRuleNamesByTarget",
+    ]
+    resources = ["*"]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:List*",
+      "ecs:Describe*",
+    ]
+    resources = ["${aws_ecs_cluster.cluster.arn}"]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:Describe*",
+      "ecs:List*",
+      "ecs:StartTask",
+      "ecs:StopTask",
+      "ecs:Poll",
+    ]
+    resources = ["*"]
+    condition {
+      test = "ArnEquals"
+      values = ["${aws_ecs_cluster.cluster.arn}"]
+      variable = "ecs:cluster"
+    }
+  }
+}
