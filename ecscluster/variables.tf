@@ -88,5 +88,5 @@ variable "ami" {
   description = "AMI to use for cluster instances."
   // Custom AMI based on AWS Linux 2 ECS optimized
   // Also has SSM.  See packer build (/packer/ecs_ssm.json)
-  default = "ami-0dcab1c98987eae51"
+  default = "ami-08d6a38d714da30db"
 }
