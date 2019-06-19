@@ -6,9 +6,7 @@ module "asg" {
   instance_type = var.instance_type
   ami           = var.ami
 
-  security_groups = [
-    var.security_groups,
-  ]
+  security_groups = var.security_groups
 
   subnets              = var.subnets
   policies             = ["arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"]
