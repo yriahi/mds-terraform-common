@@ -36,7 +36,7 @@ resource "aws_route53_record" "domain" {
  * Health Check
  */
 resource "aws_route53_health_check" "domain" {
-  count             = "${var.health_check_path == "" ? 0 : 1}"
+  count             = "${var.health_check_path == null ? 0 : 1}"
   type              = "HTTPS"
   fqdn              = "${var.domain_name}"
   port              = 443
@@ -50,7 +50,7 @@ resource "aws_route53_health_check" "domain" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "domain_watch" {
-  count               = "${var.notification_topic == "" ? 0 : 1}"
+  count               = "${var.notification_topic == null || var.health_check_path == null ? 0 : 1}"
   alarm_name          = "${var.name}_domain_health"
   namespace           = "AWS/Route53"
   metric_name         = "HealthCheckStatus"
@@ -62,7 +62,7 @@ resource "aws_cloudwatch_metric_alarm" "domain_watch" {
   unit                = "None"
 
   dimensions = {
-    HealthCheckId = "${aws_route53_health_check.domain.id}"
+    HealthCheckId = "${aws_route53_health_check.domain[0].id}"
   }
 
   alarm_description         = "Monitors uptime of domain."
