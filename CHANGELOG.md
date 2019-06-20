@@ -3,6 +3,12 @@ Changelog
 
 ## [Unreleased]
 
+## [1.0.1] - 2019-06-20
+
+### Fixed
+- [Domain] Fix domain count issue from 0.12 upgrade.
+- [ECS Cluster]  Fix security group flattening issue from 0.12 upgrade.
+
 ## [1.0.0] - 2019-06-19
 
 ### Added
