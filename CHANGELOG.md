@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.0.3] - 2019-07-01
+
+### BREAKING
+
+- [Static Site] Added environments to static site module to allow specifying prod and non-prod environments as part of the same invocation of the module.
+
 ## [1.0.2] - 2019-06-24
 
 ### Fixed
