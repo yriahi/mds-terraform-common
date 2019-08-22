@@ -92,8 +92,8 @@ data "aws_iam_policy_document" "access_chamber_params" {
       "ssm:GetParameters",
     ]
     resources = [
-      "arn:aws:ssm:*:*:parameter/${local.secrets_namespace}/*",
-      "arn:aws:ssm:us-east-1:748039698304:parameter/infrastructure/ci-decryption",
+      "arn:aws:ssm:*:${local.account_id}:parameter/${local.secrets_namespace}/*",
+      "arn:aws:ssm:${local.region}:${local.account_id}:parameter/infrastructure/ci-decryption",
     ]
   }
 }
