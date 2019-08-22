@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.0.8] - 2019-08-22
+
+### Added
+- [Slack Alerts] Added Slack Alerts lambda module to fire Slack alerts based on SNS topic messages.
+
 ## [1.0.6] - 2019-07-24
 
 ### Added
