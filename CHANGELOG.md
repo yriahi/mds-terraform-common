@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.0.9] - 2019-08-22
+
+### Added
+- [Pipelines] Implement CI pipelines module to allow for flexible Codebuild Pipelines to apply infrastructure-as-code changes.
+
 ## [1.0.8] - 2019-08-22
 
 ### Added
