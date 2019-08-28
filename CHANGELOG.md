@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2019-08-28
+
+### Fixed
+- [Pipelines] Add region and account ID variables to pipeline module.
+
+### Changed
+- [All] Remove BLESS CA from packer build and update asg and ecscluster AMIs.
+
 ## [1.0.9] - 2019-08-22
 
 ### Added
