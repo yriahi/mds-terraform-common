@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [1.1.0] - 2019-08-28
+## [1.0.10] - 2019-08-28
 
 ### Fixed
 - [Pipelines] Add region and account ID variables to pipeline module.
