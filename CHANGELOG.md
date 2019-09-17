@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [1.0.14] - 2019-09-17
+- [ASG] Make ASG launch with the updated AmazonSSMManagedInstanceCore policy instead of the old SSM policy.
+
 ## [1.0.13] - 2019-09-17
 - [ASG] Make ASG launch template EBS optimized.
 
