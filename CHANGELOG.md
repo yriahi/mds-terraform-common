@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [1.0.13] - 2019-09-17
+- [ASG] Make ASG launch template EBS optimized.
+
 ## [1.0.10] - 2019-08-28
 
 ### Fixed
