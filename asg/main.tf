@@ -9,6 +9,7 @@ resource "aws_launch_template" "default" {
   vpc_security_group_ids = var.security_groups
   key_name               = var.keypair
   user_data              = var.user_data
+  ebs_optimized          = true
 
   block_device_mappings {
     device_name = "/dev/xvda"
