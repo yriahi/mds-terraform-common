@@ -39,6 +39,12 @@ variable "security_groups" {
   default     = []
 }
 
+variable "policies" {
+  type        = list(string)
+  description = "Custom policies for the ECS Cluster."
+  default     = []
+}
+
 variable "volume_size" {
   type        = string
   description = "The EBS volume size to use for the root EBS volume"
