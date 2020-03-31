@@ -40,10 +40,6 @@ resource "aws_codebuild_project" "plan" {
     git_clone_depth     = "1"
     report_build_status = true
     buildspec           = ".pipeline/plan.yml"
-    auth {
-      type     = "OAUTH"
-      resource = var.oauth_token
-    }
   }
   tags = merge(
     var.tags,
@@ -107,10 +103,6 @@ resource "aws_codebuild_project" "apply_develop" {
     git_clone_depth     = "1"
     report_build_status = true
     buildspec           = ".pipeline/apply.yml"
-    auth {
-      type     = "OAUTH"
-      resource = var.oauth_token
-    }
   }
   tags = merge(
     var.tags,
@@ -169,10 +161,6 @@ resource "aws_codebuild_project" "apply_master" {
     git_clone_depth     = "1"
     report_build_status = true
     buildspec           = ".pipeline/apply.yml"
-    auth {
-      type     = "OAUTH"
-      resource = var.oauth_token
-    }
   }
   tags = merge(
     var.tags,

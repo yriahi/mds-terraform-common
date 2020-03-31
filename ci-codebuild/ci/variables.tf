@@ -13,11 +13,6 @@ variable "repository" {
   description = "The github repository URL"
 }
 
-variable "oauth_token" {
-  type        = string
-  description = "The github OAuth token to use when authenticating to github"
-}
-
 variable "build_image" {
   type        = string
   description = "The docker image to run builds in."
