@@ -37,7 +37,7 @@ resource "aws_codebuild_project" "test_develop" {
       value = "develop"
     }
   }
-  service_role = aws_iam_role.apply.arn
+  service_role = aws_iam_role.plan.arn
   source {
     type                = "CODEBUILD"
     location            = var.repository
