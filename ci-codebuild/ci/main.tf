@@ -48,7 +48,7 @@ resource "aws_codebuild_project" "test_develop" {
   tags = merge(
     var.tags,
     {
-      "Name" = "${var.name}-applydev"
+      "Name" = "${var.name}-test-develop"
     },
   )
 }
@@ -93,7 +93,7 @@ resource "aws_codebuild_project" "deploy_master" {
   tags = merge(
     var.tags,
     {
-      "Name" = "${var.name}-applymas"
+      "Name" = "${var.name}-deploy-master"
     },
   )
 }
