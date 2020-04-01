@@ -8,9 +8,8 @@ locals {
   secrets_namespace = "tf/${var.namespace}"
 }
 
-
 resource "aws_codebuild_project" "test_develop" {
-  name = "${var.name}-testdev"
+  name = "${var.name}-testdevelop"
   artifacts {
     type = "NO_ARTIFACTS"
   }
@@ -55,7 +54,7 @@ resource "aws_codebuild_project" "test_develop" {
 }
 
 resource "aws_codebuild_project" "deploy_master" {
-  name = "${var.name}-applymas"
+  name = "${var.name}-deploymaster"
   artifacts {
     type = "NO_ARTIFACTS"
   }
