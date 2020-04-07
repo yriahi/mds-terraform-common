@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+## [1.0.20] - 2020-04-01
+
+### Changed
+
+- [ASG, ECS Cluster] Bump AMIs to more recent versions.
+
+## [1.0.19] - 2020-03-31
+
+### Added
+
+- [Lambda] Allow setting Lambda function memory.
+
 ## [1.0.18] - 2020-02-04
 
 ### Changed
