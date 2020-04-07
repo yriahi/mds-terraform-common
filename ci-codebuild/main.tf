@@ -154,7 +154,6 @@ resource "aws_cloudwatch_event_rule" "build_failure" {
   }
 }
 EOD
-
 }
 
 resource "aws_cloudwatch_event_target" "build_failure" {
