@@ -7,47 +7,6 @@ locals {
   secrets_namespace = "tf/${var.namespace}"
 }
 
-resource "aws_codebuild_project" "plan" {
-  name = "${var.name}-plan"
-  artifacts {
-    type = "NO_ARTIFACTS"
-  }
-  cache {
-    type  = "LOCAL"
-    modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"]
-  }
-  environment {
-    compute_type = "BUILD_GENERAL1_SMALL"
-    image        = var.build_image
-    type         = "LINUX_CONTAINER"
-
-    # Use privileged mode to allow Docker images to be built.
-    privileged_mode = true
-    environment_variable {
-      name  = "CHAMBER_KMS_KEY_ALIAS"
-      value = var.chamber_key
-    }
-    environment_variable {
-      name  = "CHAMBER_NAMESPACE"
-      value = local.secrets_namespace
-    }
-  }
-  service_role = aws_iam_role.plan.arn
-  source {
-    type                = "CODEBUILD"
-    location            = var.repository
-    git_clone_depth     = "1"
-    report_build_status = true
-    buildspec           = ".codebuild/plan.yml"
-  }
-  tags = merge(
-    var.tags,
-    {
-      "Name" = "${var.name}-plan"
-    },
-  )
-}
-
 resource "aws_codebuild_project" "apply_develop" {
   name = "${var.name}-applydev"
   artifacts {
