@@ -1,15 +1,55 @@
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
-
 locals {
-  region            = "${coalesce(var.region, data.aws_region.current.name)}"
-  account_id        = "${coalesce(var.account_id, data.aws_caller_identity.current.account_id)}"
+  region = "${coalesce(var.region, data.aws_region.current.name)}"
+  account_id = "${coalesce(var.account_id, data.aws_caller_identity.current.account_id)}"
   secrets_namespace = "tf/${var.namespace}"
 }
 
-resource "aws_codebuild_project" "test_develop" {
-  name = "${var.name}-testdevelop"
+resource "aws_codebuild_project" "plan" {
+  name = "${var.name}-plan"
+  artifacts {
+    type = "NO_ARTIFACTS"
+  }
+  cache {
+    type  = "LOCAL"
+    modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE", "LOCAL_CUSTOM_CACHE"]
+  }
+  environment {
+    compute_type = "BUILD_GENERAL1_SMALL"
+    image        = var.build_image
+    type         = "LINUX_CONTAINER"
+
+    # Use privileged mode to allow Docker images to be built.
+    privileged_mode = true
+    environment_variable {
+      name  = "CHAMBER_KMS_KEY_ALIAS"
+      value = var.chamber_key
+    }
+    environment_variable {
+      name  = "CHAMBER_NAMESPACE"
+      value = local.secrets_namespace
+    }
+  }
+  service_role = aws_iam_role.plan.arn
+  source {
+    type                = "CODEBUILD"
+    location            = var.repository
+    git_clone_depth     = "1"
+    report_build_status = true
+    buildspec           = ".codebuild/plan.yml"
+  }
+  tags = merge(
+    var.tags,
+    {
+      "Name" = "${var.name}-plan"
+    },
+  )
+}
+
+resource "aws_codebuild_project" "apply_develop" {
+  name = "${var.name}-applydev"
   artifacts {
     type = "NO_ARTIFACTS"
   }
@@ -37,24 +77,24 @@ resource "aws_codebuild_project" "test_develop" {
       value = "develop"
     }
   }
-  service_role = aws_iam_role.plan.arn
+  service_role = aws_iam_role.apply.arn
   source {
     type                = "CODEBUILD"
     location            = var.repository
     git_clone_depth     = "1"
     report_build_status = true
-    buildspec           = ".codebuild/test.yml"
+    buildspec           = ".codebuild/apply.yml"
   }
   tags = merge(
     var.tags,
     {
-      "Name" = "${var.name}-test-develop"
+      "Name" = "${var.name}-applydev"
     },
   )
 }
 
-resource "aws_codebuild_project" "deploy_master" {
-  name = "${var.name}-deploymaster"
+resource "aws_codebuild_project" "apply_master" {
+  name = "${var.name}-applymas"
   artifacts {
     type = "NO_ARTIFACTS"
   }
@@ -88,12 +128,12 @@ resource "aws_codebuild_project" "deploy_master" {
     location            = var.repository
     git_clone_depth     = "1"
     report_build_status = true
-    buildspec           = ".codebuild/deploy.yml"
+    buildspec           = ".codebuild/apply.yml"
   }
   tags = merge(
     var.tags,
     {
-      "Name" = "${var.name}-deploy-master"
+      "Name" = "${var.name}-applymas"
     },
   )
 }
@@ -118,15 +158,15 @@ EOD
 }
 
 resource "aws_cloudwatch_event_target" "build_failure" {
-  count     = length(var.failure_topics)
-  arn       = element(var.failure_topics, count.index)
-  rule      = aws_cloudwatch_event_rule.build_failure.name
+  count = length(var.failure_topics)
+  arn = element(var.failure_topics, count.index)
+  rule = aws_cloudwatch_event_rule.build_failure.name
   target_id = "${var.name}-to-SNS"
   input_transformer {
     input_template = jsonencode("Codebuild job failed for <project-name>")
     input_paths = {
       "project-name" = "$.detail.project-name"
-      "build-id"     = "$.id"
+      "build-id" = "$.id"
     }
   }
 }
